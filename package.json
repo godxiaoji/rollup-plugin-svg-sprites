@@ -1,0 +1,43 @@
+{
+  "name": "rollup-plugin-svg-sprites",
+  "version": "0.0.4",
+  "description": "Rollup plugin for creating SVG sprites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rollup",
+    "rollup-plugin",
+    "svg",
+    "svg-sprite",
+    "svg-sprite-loader"
+  ],
+  "author": "Travis Lin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/godxiaoji/rollup-plugin-svg-sprites/issues"
+  },
+  "homepage": "https://github.com/godxiaoji/rollup-plugin-svg-sprites#readme",
+  "files": [
+    "browser-import.js",
+    "index.js"
+  ],
+  "dependencies": {
+    "domready": "^1.0.8",
+    "nanoid": "^3.1.30",
+    "svg-baker": "^1.7.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "cz-conventional-changelog": "^3.3.0",
+    "rollup": "^2.60.1",
+    "svg-baker-runtime": "^1.4.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
