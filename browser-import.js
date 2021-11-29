@@ -1,3 +1,4 @@
+/* eslint-disable */
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 var deepmerge = {exports: {}};
@@ -912,7 +913,6 @@ const spriteNodeId = '__SVG_SPRITE_NODE__';
 const spriteGlobalVarName = '__SVG_SPRITE__';
 const isSpriteExists = !!window[spriteGlobalVarName];
 
-// eslint-disable-next-line import/no-mutable-exports
 let sprite;
 
 if (isSpriteExists) {

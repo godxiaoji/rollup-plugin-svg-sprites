@@ -1,9 +1,11 @@
 {
   "name": "rollup-plugin-svg-sprites",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Rollup plugin for creating SVG sprites.",
+  "types": "./index.d.ts",
   "main": "index.js",
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,11 +23,12 @@
   "homepage": "https://github.com/godxiaoji/rollup-plugin-svg-sprites#readme",
   "files": [
     "browser-import.js",
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "dependencies": {
     "domready": "^1.0.8",
-    "nanoid": "^3.1.30",
+    "md5": "^2.3.0",
     "svg-baker": "^1.7.0"
   },
   "devDependencies": {

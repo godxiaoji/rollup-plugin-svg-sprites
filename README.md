@@ -18,7 +18,11 @@ yarn add rollup-plugin-svg-sprites @rollup/plugin-commonjs -D
 
 ## Usage
 
-```
+### Basic usage
+
+`rollup.config.js`:
+
+```Javascript
 import svgSprites from 'rollup-plugin-svg-sprites'
 import commonjs from '@rollup/plugin-commonjs'
 
@@ -30,22 +34,148 @@ export default {
   },
   plugins: [
     commonjs(),
-    svgSprite()
+    svgSprites()
   ]
 }
 ```
 
-## Configuration
+`foo.js`:
 
-symbolId ((path: string) => string)
+```Javascript
+import MyIcon from './my-icon.svg'
+
+// <svg><use xlink:href="#${MyIcon.id}"></use></svg>
+```
+
+### Be use for Vue3.x `Vite`
+
+`vite.config.js `:
+
+```Javascript
+import svgSprites from 'rollup-plugin-svg-sprites'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    svgSprites({
+      vueComponent: true,
+      exclude: ['node_modules/**']
+    })
+  ]
+})
+```
+
+`Vue SFC`:
+
+```Vue
+<template>
+  <MyIcon />
+</template>
+
+<script setup>
+import MyIcon from './my-icon.svg'
+</script>
+```
+
+### A large number of SVGs
+
+eg from [vfox](https://github.com/godxiaoji/vfox):
+
+1. `rollup.config.js`:
+
+```Javascript
+import svgSprites from 'rollup-plugin-svg-sprites'
+import requireContext from '@godxiaoji/rollup-plugin-require-context'
+
+function kebabCase2PascalCase(name) {
+  name = name.replace(/-(\w)/g, (all, letter) => {
+    return letter.toUpperCase()
+  })
+  return name.substr(0, 1).toUpperCase() + name.substr(1)
+}
+
+export default {
+  input: './src/load-svg.js',
+  output: {
+    format: 'esm',
+    file: `lib/load-svg.js`,
+    banner: '/* eslint-disable */'
+  },
+  plugins: [
+    requireContext(),
+    svgSprites({
+      symbolId(filePath) {
+        const paths = filePath
+          .replace(/\\/g, '/')
+          .split('assets/icons/')[1]
+          .split('/')
+
+        const fileName = paths.pop().replace('.svg', '')
+        return (
+          'icon-' + kebabCase2PascalCase([fileName].concat(paths).join('-'))
+        )
+      }
+    })
+  ],
+}
+```
+
+2. `./src/load-svg.js`:
+
+```Javascript
+const req = require.context('./assets/icons', true, /\.svg$/)
+```
+
+3. Output the library:
 
 ```
+rollup -c
+```
+
+4. Use in `Vue SFC`:
+
+```Vue
+<template>
+  <svg>
+    <use xlink:href="#icon-My"></use>
+  </svg>
+</template>
+
+<script setup>
+import './lib/load-svg'
+</script>
+```
+
+## Configuration
+
+### symbolId: (path: string) => string
+
+How <symbol> id attribute should be named.
+
+eg:
+
+```Javascript
 svgSprite({
-  symbolId(path) {
-    return newPath
+  symbolId(path, query) {
+    return path.basename(path)
   }
 })
 ```
+
+### exclude: string | string[]
+
+A [minimatch pattern](https://github.com/isaacs/minimatch), or array of patterns, which specifies the files in the build the plugin should _ignore_.
+
+### include: string | string[]
+
+A [minimatch pattern](https://github.com/isaacs/minimatch), or array of patterns, which specifies the files in the build the plugin should operate on.
+
+### vueComponent: boolean
+
+Default: `false`
+
+If true, when import "_.svg" will return a Vue3.x Component. Priority level is weaker than import "_.svg?vueComponent".
 
 ## LICENSE
 

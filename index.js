@@ -1,46 +1,54 @@
-const { resolve, extname } = require('path')
-const { readFileSync } = require('fs')
-const nanoid = require('nanoid')
+const { resolve } = require('path')
+const fs = require('fs').promises
+const md5 = require('md5')
 const symbolFactory = require('svg-baker/lib/symbol-factory')
+const { createFilter } = require('@rollup/pluginutils')
+const { compileTemplate } = require('@vue/compiler-sfc')
 
 const symbolOptionsCaches = []
 
-module.exports = function svgSpriteLoader(options = {}) {
+module.exports = function svgSprites(options = {}) {
+  const svgRegex = /\.svg(\?(vueComponent))?$/
+  const filter = createFilter(options.include, options.exclude)
+
   return {
     name: 'rollup-plugin-svg-sprites',
-    resolveId(importee, importer) {
-      if (importee == 'svg-sprites-virtual-module') {
-        return importee
+    enforce: 'pre',
+    resolveId(source, importer) {
+      if (source == 'svg-sprites-virtual-module') {
+        return source
       }
-      // if (importer == 'svg-sprites-virtual-module') {
-      //   return {
-      //     id: resolve(__dirname, '../', importee),
-      //     external: false
-      //   }
+      // if (source.match(svgRegex)) {
+      //   return source
       // }
       return null
     },
     async load(id) {
       if (id === 'svg-sprites-virtual-module') {
-        const data = readFileSync(
+        const data = await fs.readFile(
           resolve(__dirname, './browser-import.js'),
           'UTF-8'
         )
         return data
       }
 
-      if (extname(id) !== '.svg') return null
+      if (!filter(id) || !id.match(svgRegex)) {
+        return null
+      }
 
-      const data = readFileSync(id, 'UTF-8')
+      const [path, query] = id.split('?', 2)
 
-      let symbolOptions = symbolOptionsCaches.find(svg => svg.content === data)
+      const data = await fs.readFile(path, 'UTF-8')
+
+      let symbolOptions = symbolOptionsCaches.find(
+        options => options.content === data
+      )
       if (!symbolOptions) {
-        // 处理下命名规则
         let useId
         if (typeof options.symbolId === 'function') {
-          useId = options.symbolId(id)
+          useId = options.symbolId(path, query)
         } else {
-          useId = nanoid()
+          useId = md5(data)
         }
 
         const processingResult = await new symbolFactory({
@@ -58,12 +66,29 @@ module.exports = function svgSpriteLoader(options = {}) {
         symbolOptionsCaches.push(symbolOptions)
       }
 
-      return [
-        'import {sprite, SpriteSymbol} from "svg-sprites-virtual-module";',
-        `var symbol = new SpriteSymbol(${JSON.stringify(symbolOptions)});`,
-        'sprite.add(symbol);',
-        'export default symbol;'
-      ].join('\n')
+      const renders = [
+        'import {sprite, SpriteSymbol} from "svg-sprites-virtual-module"',
+        `const symbol = new SpriteSymbol(${JSON.stringify(symbolOptions)})`,
+        'sprite.add(symbol)'
+      ]
+
+      if (query === 'vueComponent' || options.vueComponent) {
+        const { code } = compileTemplate({
+          id: JSON.stringify(symbolOptions.id),
+          source: `<svg><use xlink:href="#${symbolOptions.id}"></use></svg>`,
+          filename: path,
+          transformAssetUrls: false
+        })
+
+        renders.push(code)
+        renders.push('export default { render: render }')
+      } else {
+        renders.push('export default symbol')
+      }
+
+      return renders.join(`\n`)
     }
   }
 }
+
+module.exports.default = module.exports
