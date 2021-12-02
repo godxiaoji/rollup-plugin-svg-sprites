@@ -10,10 +10,20 @@ The plugin dependencies `svg-baker`. It requires `@rollup/plugin-commonjs`.
 
 ```
 // npm
-npm i rollup-plugin-svg-sprites @rollup/plugin-commonjs -D
+npm i rollup-plugin-svg-sprites -D
 
 // yarn
-yarn add rollup-plugin-svg-sprites @rollup/plugin-commonjs -D
+yarn add rollup-plugin-svg-sprites -D
+```
+
+The plugin dependencies `svg-baker`. It requires `@rollup/plugin-commonjs`.
+
+```
+// npm
+npm i @rollup/plugin-commonjs -D
+
+// yarn
+yarn add @rollup/plugin-commonjs -D
 ```
 
 ## Usage
@@ -22,7 +32,7 @@ yarn add rollup-plugin-svg-sprites @rollup/plugin-commonjs -D
 
 `rollup.config.js`:
 
-```Javascript
+```JavaScript
 import svgSprites from 'rollup-plugin-svg-sprites'
 import commonjs from '@rollup/plugin-commonjs'
 
@@ -41,7 +51,7 @@ export default {
 
 `foo.js`:
 
-```Javascript
+```JavaScript
 import MyIcon from './my-icon.svg'
 
 // <svg><use xlink:href="#${MyIcon.id}"></use></svg>
@@ -51,7 +61,7 @@ import MyIcon from './my-icon.svg'
 
 `vite.config.js `:
 
-```Javascript
+```JavaScript
 import svgSprites from 'rollup-plugin-svg-sprites'
 
 // https://vitejs.dev/config/
@@ -84,7 +94,7 @@ eg from [vfox](https://github.com/godxiaoji/vfox):
 
 1. `rollup.config.js`:
 
-```Javascript
+```JavaScript
 import svgSprites from 'rollup-plugin-svg-sprites'
 import requireContext from '@godxiaoji/rollup-plugin-require-context'
 
@@ -123,7 +133,7 @@ export default {
 
 2. `./src/load-svg.js`:
 
-```Javascript
+```JavaScript
 const req = require.context('./assets/icons', true, /\.svg$/)
 ```
 
@@ -155,7 +165,7 @@ How <symbol> id attribute should be named.
 
 eg:
 
-```Javascript
+```JavaScript
 svgSprite({
   symbolId(path, query) {
     return path.basename(path)
@@ -176,6 +186,17 @@ A [minimatch pattern](https://github.com/isaacs/minimatch), or array of patterns
 Default: `false`
 
 If true, when import "_.svg" will return a Vue3.x Component. Priority level is weaker than import "_.svg?vueComponent".
+
+### jsx: boolean
+
+Default: `false`
+
+If true, when import "_.svg" will return a JSX Function. Priority level is weaker than import "_.svg?jsx".
+
+PS: 
+
+- It use the new [JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html), so the react version requirement is `>=17.0.0`, `>=16.14.0` or `>=15.7.0`.
+- If JSX is used in Vue, "vueComponent" should be used instead.
 
 ## LICENSE
 

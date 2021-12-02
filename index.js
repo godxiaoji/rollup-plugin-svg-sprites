@@ -3,12 +3,12 @@ const fs = require('fs').promises
 const md5 = require('md5')
 const symbolFactory = require('svg-baker/lib/symbol-factory')
 const { createFilter } = require('@rollup/pluginutils')
-const { compileTemplate } = require('@vue/compiler-sfc')
+const { compileJSXCode, compileVueTemplateCode } = require('./compiler')
 
 const symbolOptionsCaches = []
 
 module.exports = function svgSprites(options = {}) {
-  const svgRegex = /\.svg(\?(vueComponent))?$/
+  const svgRegex = /\.svg(\?(jsx|vueComponent))?$/
   const filter = createFilter(options.include, options.exclude)
 
   return {
@@ -72,16 +72,10 @@ module.exports = function svgSprites(options = {}) {
         'sprite.add(symbol)'
       ]
 
-      if (query === 'vueComponent' || options.vueComponent) {
-        const { code } = compileTemplate({
-          id: JSON.stringify(symbolOptions.id),
-          source: `<svg><use xlink:href="#${symbolOptions.id}"></use></svg>`,
-          filename: path,
-          transformAssetUrls: false
-        })
-
-        renders.push(code)
-        renders.push('export default { render: render }')
+      if (query === 'jsx' || options.jsx) {
+        renders.push(compileJSXCode(symbolOptions.id, path))
+      } else if (query === 'vueComponent' || options.vueComponent) {
+        renders.push(compileVueTemplateCode(symbolOptions.id, path))
       } else {
         renders.push('export default symbol')
       }

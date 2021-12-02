@@ -7,6 +7,12 @@ declare module '*.svg?vueComponent' {
   export default component
 }
 
+declare module '*.svg?jsx' {
+  import { ReactElement } from 'react'
+  const component: ReactElement<any, any>
+  export default component
+}
+
 interface SvgSpritesOptions {
   /**
    * How <symbol> id attribute should be named.
@@ -28,6 +34,11 @@ interface SvgSpritesOptions {
    * @default false
    */
   vueComponent?: boolean
+  /**
+   * If true, when import "*.svg" will return a JSX Function. Priority level is weaker than import "*.svg?jsx".
+   * @default false
+   */
+  jsx?: boolean
 }
 
 export default function svgSprites(options?: SvgSpritesOptions): Plugin
