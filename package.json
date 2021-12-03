@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-svg-sprites",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Rollup plugin for creating SVG sprites.",
   "types": "./index.d.ts",
   "main": "index.js",
@@ -24,7 +24,8 @@
   "files": [
     "browser-import.js",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "compiler.js"
   ],
   "dependencies": {
     "@rollup/pluginutils": "^4.1.1",
