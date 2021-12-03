@@ -57,7 +57,7 @@ import MyIcon from './my-icon.svg'
 // <svg><use xlink:href="#${MyIcon.id}"></use></svg>
 ```
 
-### Be use for Vue3.x `Vite`
+### Be use for Vue3.x Vite
 
 `vite.config.js `:
 
@@ -86,6 +86,41 @@ export default defineConfig({
 <script setup>
 import MyIcon from './my-icon.svg'
 </script>
+```
+
+### Vite + React
+
+1. `vite.config.js`：
+
+```JavaScript
+import svgSprites from 'rollup-plugin-svg-sprites'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    svgSprites({
+      jsx: true,
+      include: ['./icons']
+    })
+  ]
+})
+```
+
+2. `App.jsx`：
+
+```JavaScript
+import MyIcon from './my-icon.svg'
+
+function App() {
+  return (
+    <div className="App">
+      <MyIcon />
+    </div>
+  );
+}
+
+export default App;
 ```
 
 ### A large number of SVGs
