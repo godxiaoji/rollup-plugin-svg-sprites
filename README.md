@@ -28,6 +28,14 @@ yarn add @rollup/plugin-commonjs -D
 
 ## Usage
 
+### Use in TypeScript
+
+For example, the entry, `shims-vue.d.ts` or `env.d.ts`(Vite) add:
+
+```
+/// <reference types="rollup-plugin-svg-sprites" />
+```
+
 ### Basic usage
 
 `rollup.config.js`:
@@ -69,7 +77,6 @@ export default defineConfig({
   plugins: [
     vue(),
     svgSprites({
-      vueComponent: true,
       exclude: ['node_modules/**']
     })
   ]
@@ -84,7 +91,7 @@ export default defineConfig({
 </template>
 
 <script setup>
-import MyIcon from './my-icon.svg'
+import MyIcon from './my-icon.svg?vueComponent'
 </script>
 ```
 
@@ -100,7 +107,6 @@ export default defineConfig({
   plugins: [
     react(),
     svgSprites({
-      jsx: true,
       include: ['./icons']
     })
   ]
@@ -110,7 +116,7 @@ export default defineConfig({
 2. `App.jsx`：
 
 ```JavaScript
-import MyIcon from './my-icon.svg'
+import MyIcon from './my-icon.svg?jsx'
 
 function App() {
   return (
@@ -228,7 +234,7 @@ Default: `false`
 
 If true, when import "_.svg" will return a JSX Function. Priority level is weaker than import "_.svg?jsx".
 
-PS: 
+PS:
 
 - It use the new [JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html), so the react version requirement is `>=17.0.0`, `>=16.14.0` or `>=15.7.0`.
 - If JSX is used in Vue, "vueComponent" should be used instead.
