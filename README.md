@@ -30,10 +30,20 @@ yarn add @rollup/plugin-commonjs -D
 
 ### Use in TypeScript
 
-For example, the entry, `shims-vue.d.ts` or `env.d.ts`(Vite) add:
+Add the type definitions in `*.d.ts`:
 
 ```
-/// <reference types="rollup-plugin-svg-sprites" />
+declare module '*.svg?vueComponent' {
+  import { Component } from 'vue'
+  const src: Component
+  export default src
+}
+
+declare module '*.svg?jsx' {
+  import { ReactElement } from 'react'
+  const src: ReactElement<any, any>
+  export default src
+}
 ```
 
 ### Basic usage

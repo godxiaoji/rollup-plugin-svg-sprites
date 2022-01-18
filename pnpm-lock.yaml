@@ -4,29 +4,364 @@ specifiers:
   '@rollup/plugin-commonjs': ^21.0.1
   '@rollup/plugin-node-resolve': ^13.0.6
   '@rollup/pluginutils': ^4.1.1
+  '@types/md5': ^2.3.1
   '@vue/compiler-sfc': ^3.2.23
   cz-conventional-changelog: ^3.3.0
   domready: ^1.0.8
   md5: ^2.3.0
   rollup: ^2.60.1
+  rollup-plugin-typescript2: ^0.31.1
   svg-baker: ^1.7.0
   svg-baker-runtime: ^1.4.7
+  typescript: ^4.5.4
 
 dependencies:
   '@rollup/pluginutils': registry.npmmirror.com/@rollup/pluginutils/4.1.2
   '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/3.2.26
   domready: registry.npmmirror.com/domready/1.0.8
-  md5: registry.npmmirror.com/md5/2.3.0
+  md5: 2.3.0
   svg-baker: registry.nlark.com/svg-baker/1.7.0
 
 devDependencies:
   '@rollup/plugin-commonjs': registry.npmmirror.com/@rollup/plugin-commonjs/21.0.1_rollup@2.63.0
   '@rollup/plugin-node-resolve': registry.npmmirror.com/@rollup/plugin-node-resolve/13.1.3_rollup@2.63.0
+  '@types/md5': 2.3.1
   cz-conventional-changelog: registry.nlark.com/cz-conventional-changelog/3.3.0
   rollup: registry.npmmirror.com/rollup/2.63.0
+  rollup-plugin-typescript2: 0.31.1_rollup@2.63.0+typescript@4.5.4
   svg-baker-runtime: registry.nlark.com/svg-baker-runtime/1.4.7
+  typescript: 4.5.4
 
 packages:
+
+  /@commitlint/load/16.0.0:
+    resolution: {integrity: sha512-7WhrGCkP6K/XfjBBguLkkI2XUdiiIyMGlNsSoSqgRNiD352EiffhFEApMy1/XOU+viwBBm/On0n5p0NC7e9/4A==}
+    engines: {node: '>=v12'}
+    requiresBuild: true
+    dependencies:
+      '@commitlint/config-validator': registry.npmmirror.com/@commitlint/config-validator/16.0.0
+      '@commitlint/execute-rule': registry.npmmirror.com/@commitlint/execute-rule/16.0.0
+      '@commitlint/resolve-extends': registry.npmmirror.com/@commitlint/resolve-extends/16.0.0
+      '@commitlint/types': registry.npmmirror.com/@commitlint/types/16.0.0
+      chalk: registry.npmmirror.com/chalk/4.1.2
+      cosmiconfig: registry.nlark.com/cosmiconfig/7.0.1
+      cosmiconfig-typescript-loader: registry.npmmirror.com/cosmiconfig-typescript-loader/1.0.3_typescript@4.5.4
+      lodash: registry.npmmirror.com/lodash/4.17.21
+      resolve-from: registry.nlark.com/resolve-from/5.0.0
+      typescript: 4.5.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - '@types/node'
+    dev: true
+    optional: true
+
+  /@rollup/pluginutils/4.1.2:
+    resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: true
+
+  /@ts-type/package-dts/1.0.58:
+    resolution: {integrity: sha512-Ry5RPZDAnSz/gyLtjd2a2yNC07CZ/PCOsuDzYj3phOolIgEH68HXRw6SbsDlavnVUEenDYj5GUM10gQ5iVEbVQ==}
+    peerDependencies:
+      '@types/bluebird': '*'
+      '@types/node': '*'
+      ts-toolbelt: '*'
+    dependencies:
+      '@types/semver': 7.3.9
+      ts-type: 2.1.4
+    dev: true
+
+  /@types/md5/2.3.1:
+    resolution: {integrity: sha512-OK3oe+ALIoPSo262lnhAYwpqFNXbiwH2a+0+Z5YBnkQEwWD8fk5+PIeRhYA48PzvX9I4SGNpWy+9bLj8qz92RQ==}
+    dependencies:
+      '@types/node': 17.0.8
+    dev: true
+
+  /@types/node/17.0.8:
+    resolution: {integrity: sha512-YofkM6fGv4gDJq78g4j0mMuGMkZVxZDgtU0JRdx6FgiJDG+0fY0GKVolOV8WqVmEhLCXkQRjwDdKyPxJp/uucg==}
+    dev: true
+
+  /@types/semver/7.3.9:
+    resolution: {integrity: sha512-L/TMpyURfBkf+o/526Zb6kd/tchUP3iBDEPjqjb+U2MAJhVRxxrmr2fwpe08E7QsV7YLcpq0tUaQ9O9x97ZIxQ==}
+    dev: true
+
+  /@yarn-tool/resolve-package/1.0.42:
+    resolution: {integrity: sha512-1BAsoiD6jGAaPc7mRH0UxIVXgRSTv7fnhwfKkaFUYpqsU4ZR7KIigZTMcb2bujtlzKQbNneMPQGjiqe3F8cmlw==}
+    peerDependencies:
+      '@types/node': '*'
+    dependencies:
+      '@ts-type/package-dts': 1.0.58
+      pkg-dir: 5.0.0
+      tslib: 2.3.1
+      upath2: 3.1.12
+    transitivePeerDependencies:
+      - '@types/bluebird'
+      - ts-toolbelt
+    dev: true
+
+  /commondir/1.0.1:
+    resolution: {integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=}
+    dev: true
+
+  /estree-walker/2.0.2:
+    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
+    dev: true
+
+  /find-cache-dir/3.3.2:
+    resolution: {integrity: sha512-wXZV5emFEjrridIgED11OoUKLxiYjAcqot/NJdAkOhlJ+vGzwhOAfcG5OX1jP+S0PcjEn8bdMJv+g2jwQ3Onig==}
+    engines: {node: '>=8'}
+    dependencies:
+      commondir: 1.0.1
+      make-dir: 3.1.0
+      pkg-dir: 4.2.0
+    dev: true
+
+  /find-up/4.1.0:
+    resolution: {integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==}
+    engines: {node: '>=8'}
+    dependencies:
+      locate-path: 5.0.0
+      path-exists: 4.0.0
+    dev: true
+
+  /find-up/5.0.0:
+    resolution: {integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==}
+    engines: {node: '>=10'}
+    dependencies:
+      locate-path: 6.0.0
+      path-exists: 4.0.0
+    dev: true
+
+  /fs-extra/8.1.0:
+    resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
+    engines: {node: '>=6 <7 || >=8'}
+    dependencies:
+      graceful-fs: 4.2.9
+      jsonfile: 4.0.0
+      universalify: 0.1.2
+    dev: true
+
+  /fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /function-bind/1.1.1:
+    resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
+    dev: true
+
+  /graceful-fs/4.2.9:
+    resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
+    dev: true
+
+  /has/1.0.3:
+    resolution: {integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==}
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      function-bind: 1.1.1
+    dev: true
+
+  /is-core-module/2.8.1:
+    resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==}
+    dependencies:
+      has: 1.0.3
+    dev: true
+
+  /jsonfile/4.0.0:
+    resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
+    optionalDependencies:
+      graceful-fs: 4.2.9
+    dev: true
+
+  /locate-path/5.0.0:
+    resolution: {integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==}
+    engines: {node: '>=8'}
+    dependencies:
+      p-locate: 4.1.0
+    dev: true
+
+  /locate-path/6.0.0:
+    resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
+    engines: {node: '>=10'}
+    dependencies:
+      p-locate: 5.0.0
+    dev: true
+
+  /make-dir/3.1.0:
+    resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
+    engines: {node: '>=8'}
+    dependencies:
+      semver: 6.3.0
+    dev: true
+
+  /md5/2.3.0:
+    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
+    dependencies:
+      charenc: registry.npmmirror.com/charenc/0.0.2
+      crypt: registry.npmmirror.com/crypt/0.0.2
+      is-buffer: registry.npmmirror.com/is-buffer/1.1.6
+    dev: false
+
+  /p-limit/2.3.0:
+    resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
+    engines: {node: '>=6'}
+    dependencies:
+      p-try: 2.2.0
+    dev: true
+
+  /p-limit/3.1.0:
+    resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      yocto-queue: 0.1.0
+    dev: true
+
+  /p-locate/4.1.0:
+    resolution: {integrity: sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==}
+    engines: {node: '>=8'}
+    dependencies:
+      p-limit: 2.3.0
+    dev: true
+
+  /p-locate/5.0.0:
+    resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
+    engines: {node: '>=10'}
+    dependencies:
+      p-limit: 3.1.0
+    dev: true
+
+  /p-try/2.2.0:
+    resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
+    engines: {node: '>=6'}
+    dev: true
+
+  /path-exists/4.0.0:
+    resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
+    engines: {node: '>=8'}
+    dev: true
+
+  /path-is-network-drive/1.0.13:
+    resolution: {integrity: sha512-Hg74mRN6mmXV+gTm3INjFK40ncAmC/Lo4qoQaSZ+GT3hZzlKdWQSqAjqyPeW0SvObP2W073WyYEBWY9d3wOm3A==}
+    dependencies:
+      tslib: 2.3.1
+    dev: true
+
+  /path-parse/1.0.7:
+    resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
+    dev: true
+
+  /path-strip-sep/1.0.10:
+    resolution: {integrity: sha512-JpCy+8LAJQQTO1bQsb/84s1g+/Stm3h39aOpPRBQ/paMUGVPPZChLTOTKHoaCkc/6sKuF7yVsnq5Pe1S6xQGcA==}
+    dependencies:
+      tslib: 2.3.1
+    dev: true
+
+  /picomatch/2.3.1:
+    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
+    engines: {node: '>=8.6'}
+    dev: true
+
+  /pkg-dir/4.2.0:
+    resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
+    engines: {node: '>=8'}
+    dependencies:
+      find-up: 4.1.0
+    dev: true
+
+  /pkg-dir/5.0.0:
+    resolution: {integrity: sha512-NPE8TDbzl/3YQYY7CSS228s3g2ollTFnc+Qi3tqmqJp9Vg2ovUpixcJEo2HJScN2Ez+kEaal6y70c0ehqJBJeA==}
+    engines: {node: '>=10'}
+    dependencies:
+      find-up: 5.0.0
+    dev: true
+
+  /resolve/1.20.0:
+    resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
+    dependencies:
+      is-core-module: 2.8.1
+      path-parse: 1.0.7
+    dev: true
+
+  /rollup-plugin-typescript2/0.31.1_rollup@2.63.0+typescript@4.5.4:
+    resolution: {integrity: sha512-sklqXuQwQX+stKi4kDfEkneVESPi3YM/2S899vfRdF9Yi40vcC50Oq4A4cSZJNXsAQE/UsBZl5fAOsBLziKmjw==}
+    peerDependencies:
+      rollup: '>=1.26.3'
+      typescript: '>=2.4.0'
+    dependencies:
+      '@rollup/pluginutils': 4.1.2
+      '@yarn-tool/resolve-package': 1.0.42
+      find-cache-dir: 3.3.2
+      fs-extra: 8.1.0
+      resolve: 1.20.0
+      rollup: registry.npmmirror.com/rollup/2.63.0
+      tslib: 2.2.0
+      typescript: 4.5.4
+    transitivePeerDependencies:
+      - '@types/bluebird'
+      - '@types/node'
+      - ts-toolbelt
+    dev: true
+
+  /semver/6.3.0:
+    resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
+    hasBin: true
+    dev: true
+
+  /ts-type/2.1.4:
+    resolution: {integrity: sha512-wnajiiIMhn/RHJ1oPld95siKmMJrOgaT6+rMmC8vO1LORgDFEzKP2nBmEFM5b4XVe7Q0J5KcU9oRJFzju7UzrA==}
+    peerDependencies:
+      '@types/bluebird': '*'
+      '@types/node': '*'
+      ts-toolbelt: ^9.6.0
+    dependencies:
+      tslib: 2.3.1
+      typedarray-dts: 1.0.0
+    dev: true
+
+  /tslib/2.2.0:
+    resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
+    dev: true
+
+  /tslib/2.3.1:
+    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
+    dev: true
+
+  /typedarray-dts/1.0.0:
+    resolution: {integrity: sha512-Ka0DBegjuV9IPYFT1h0Qqk5U4pccebNIJCGl8C5uU7xtOs+jpJvKGAY4fHGK25hTmXZOEUl9Cnsg5cS6K/b5DA==}
+    dev: true
+
+  /typescript/4.5.4:
+    resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /universalify/0.1.2:
+    resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
+    engines: {node: '>= 4.0.0'}
+    dev: true
+
+  /upath2/3.1.12:
+    resolution: {integrity: sha512-yC3eZeCyCXFWjy7Nu4pgjLhXNYjuzuUmJiRgSSw6TJp8Emc+E4951HGPJf+bldFC5SL7oBLeNbtm1fGzXn2gxw==}
+    peerDependencies:
+      '@types/node': '*'
+    dependencies:
+      path-is-network-drive: 1.0.13
+      path-strip-sep: 1.0.10
+      tslib: 2.3.1
+    dev: true
+
+  /yocto-queue/0.1.0:
+    resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
+    engines: {node: '>=10'}
+    dev: true
 
   registry.nlark.com/@tsconfig/node10/1.0.8:
     resolution: {integrity: sha1-weToDW+WT77LM1nEO9SLQPfK2tk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@tsconfig/node10/download/@tsconfig/node10-1.0.8.tgz}
@@ -335,7 +670,7 @@ packages:
       longest: registry.nlark.com/longest/2.0.1
       word-wrap: registry.nlark.com/word-wrap/1.2.3
     optionalDependencies:
-      '@commitlint/load': registry.npmmirror.com/@commitlint/load/16.0.0
+      '@commitlint/load': 16.0.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -355,7 +690,7 @@ packages:
       longest: registry.nlark.com/longest/2.0.1
       word-wrap: registry.nlark.com/word-wrap/1.2.3
     optionalDependencies:
-      '@commitlint/load': registry.npmmirror.com/@commitlint/load/16.0.0
+      '@commitlint/load': 16.0.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -1000,7 +1335,7 @@ packages:
     name: jsonfile
     version: 4.0.0
     optionalDependencies:
-      graceful-fs: registry.npmmirror.com/graceful-fs/4.2.9
+      graceful-fs: 4.2.9
     dev: true
 
   registry.nlark.com/kind-of/3.2.2:
@@ -1705,30 +2040,6 @@ packages:
     dev: true
     optional: true
 
-  registry.npmmirror.com/@commitlint/load/16.0.0:
-    resolution: {integrity: sha512-7WhrGCkP6K/XfjBBguLkkI2XUdiiIyMGlNsSoSqgRNiD352EiffhFEApMy1/XOU+viwBBm/On0n5p0NC7e9/4A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@commitlint/load/download/@commitlint/load-16.0.0.tgz}
-    name: '@commitlint/load'
-    version: 16.0.0
-    engines: {node: '>=v12'}
-    requiresBuild: true
-    dependencies:
-      '@commitlint/config-validator': registry.npmmirror.com/@commitlint/config-validator/16.0.0
-      '@commitlint/execute-rule': registry.npmmirror.com/@commitlint/execute-rule/16.0.0
-      '@commitlint/resolve-extends': registry.npmmirror.com/@commitlint/resolve-extends/16.0.0
-      '@commitlint/types': registry.npmmirror.com/@commitlint/types/16.0.0
-      chalk: registry.npmmirror.com/chalk/4.1.2
-      cosmiconfig: registry.nlark.com/cosmiconfig/7.0.1
-      cosmiconfig-typescript-loader: registry.npmmirror.com/cosmiconfig-typescript-loader/1.0.3_typescript@4.5.4
-      lodash: registry.npmmirror.com/lodash/4.17.21
-      resolve-from: registry.nlark.com/resolve-from/5.0.0
-      typescript: registry.npmmirror.com/typescript/4.5.4
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-      - '@types/node'
-    dev: true
-    optional: true
-
   registry.npmmirror.com/@commitlint/resolve-extends/16.0.0:
     resolution: {integrity: sha512-Z/w9MAQUcxeawpCLtjmkVNXAXOmB2nhW+LYmHEZcx9O6UTauF/1+uuZ2/r0MtzTe1qw2JD+1QHVhEWYHVPlkdA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@commitlint/resolve-extends/download/@commitlint/resolve-extends-16.0.0.tgz}
     name: '@commitlint/resolve-extends'
@@ -2100,7 +2411,7 @@ packages:
     dependencies:
       cosmiconfig: registry.nlark.com/cosmiconfig/7.0.1
       ts-node: registry.npmmirror.com/ts-node/10.4.0_typescript@4.5.4
-      typescript: registry.npmmirror.com/typescript/4.5.4
+      typescript: 4.5.4
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -2164,16 +2475,6 @@ packages:
       micromatch: registry.nlark.com/micromatch/4.0.4
       resolve-dir: registry.nlark.com/resolve-dir/1.0.1
     dev: true
-
-  registry.npmmirror.com/fsevents/2.3.2:
-    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fsevents/download/fsevents-2.3.2.tgz}
-    name: fsevents
-    version: 2.3.2
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
 
   registry.npmmirror.com/glob/7.1.4:
     resolution: {integrity: sha512-hkLPepehmnKk41pUGm3sYxoFs/umurYfYJCerbXEyFIWcAzvpipAgVkBqqT9RBKMGjnq6kMuyYwha6csxbiM1A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/glob/download/glob-7.1.4.tgz}
@@ -2317,16 +2618,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       object-visit: registry.nlark.com/object-visit/1.0.1
-
-  registry.npmmirror.com/md5/2.3.0:
-    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/md5/download/md5-2.3.0.tgz}
-    name: md5
-    version: 2.3.0
-    dependencies:
-      charenc: registry.npmmirror.com/charenc/0.0.2
-      crypt: registry.npmmirror.com/crypt/0.0.2
-      is-buffer: registry.npmmirror.com/is-buffer/1.1.6
-    dev: false
 
   registry.npmmirror.com/mitt/1.1.2:
     resolution: {integrity: sha512-3btxP0O9iGADGWAkteQ8mzDtEspZqu4I32y4GZYCV5BrwtzdcRpF4dQgNdJadCrbBx7Lu6Sq9AVrerMHR0Hkmw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mitt/download/mitt-1.1.2.tgz}
@@ -2473,7 +2764,7 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: registry.npmmirror.com/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   registry.npmmirror.com/rxjs/6.6.7:
@@ -2626,7 +2917,7 @@ packages:
       create-require: registry.nlark.com/create-require/1.1.1
       diff: registry.nlark.com/diff/4.0.2
       make-error: registry.nlark.com/make-error/1.3.6
-      typescript: registry.npmmirror.com/typescript/4.5.4
+      typescript: 4.5.4
       yn: registry.nlark.com/yn/3.1.1
     dev: true
     optional: true
@@ -2636,15 +2927,6 @@ packages:
     name: tslib
     version: 1.14.1
     dev: true
-
-  registry.npmmirror.com/typescript/4.5.4:
-    resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/typescript/download/typescript-4.5.4.tgz}
-    name: typescript
-    version: 4.5.4
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dev: true
-    optional: true
 
   registry.npmmirror.com/urix/0.1.0:
     resolution: {integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/urix/download/urix-0.1.0.tgz}

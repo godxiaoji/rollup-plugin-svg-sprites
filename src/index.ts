@@ -1,20 +1,52 @@
-const { resolve } = require('path')
-const fs = require('fs').promises
-const md5 = require('md5')
-const symbolFactory = require('svg-baker/lib/symbol-factory')
-const { createFilter } = require('@rollup/pluginutils')
-const { compileJSXCode, compileVueTemplateCode } = require('./compiler')
+import { resolve } from 'path'
+import { promises as fs } from 'fs'
+import md5 from 'md5'
+import symbolFactory from 'svg-baker/lib/symbol-factory'
+import { compileJSXCode, compileVueTemplateCode } from './compiler'
+import { FilterPattern, createFilter } from '@rollup/pluginutils'
 
-const symbolOptionsCaches = []
+const symbolOptionsCaches: {
+  id: string
+  content: string
+  viewBox: string
+}[] = []
 
-module.exports = function svgSprites(options = {}) {
+type Options = {
+  /**
+   * How <symbol> id attribute should be named.
+   * @default md5(svgContent)
+   */
+  symbolId?: (path: string, query?: string) => string
+  /**
+   * You can specifically include files
+   * @default undefined
+   */
+  include?: FilterPattern
+  /**
+   * You can specifically exclude files.
+   * @default undefined
+   */
+  exclude?: FilterPattern
+  /**
+   * If true, when import "*.svg" will return a Vue3.x Component. Priority level is weaker than import "*.svg?vueComponent".
+   * @default false
+   */
+  vueComponent?: boolean
+  /**
+   * If true, when import "*.svg" will return a JSX Function. Priority level is weaker than import "*.svg?jsx".
+   * @default false
+   */
+  jsx?: boolean
+}
+
+export default function svgSprites(options: Options = {}) {
   const svgRegex = /\.svg(\?(jsx|vueComponent))?$/
   const filter = createFilter(options.include, options.exclude)
 
   return {
     name: 'rollup-plugin-svg-sprites',
-    enforce: 'pre',
-    resolveId(source, importer) {
+    enforce: 'pre' as const,
+    resolveId(source: string, importer: string) {
       if (source == 'svg-sprites-virtual-module') {
         return source
       }
@@ -23,11 +55,13 @@ module.exports = function svgSprites(options = {}) {
       // }
       return null
     },
-    async load(id) {
+    async load(id: string) {
       if (id === 'svg-sprites-virtual-module') {
         const data = await fs.readFile(
           resolve(__dirname, './browser-import.js'),
-          'UTF-8'
+          {
+            encoding: 'utf-8'
+          }
         )
         return data
       }
@@ -38,7 +72,9 @@ module.exports = function svgSprites(options = {}) {
 
       const [path, query] = id.split('?', 2)
 
-      const data = await fs.readFile(path, 'UTF-8')
+      const data = await fs.readFile(path, {
+        encoding: 'utf-8'
+      })
 
       let symbolOptions = symbolOptionsCaches.find(
         options => options.content === data
@@ -51,7 +87,7 @@ module.exports = function svgSprites(options = {}) {
           useId = md5(data)
         }
 
-        const processingResult = await new symbolFactory({
+        const processingResult = await symbolFactory({
           id: useId,
           content: data
         })
@@ -84,5 +120,3 @@ module.exports = function svgSprites(options = {}) {
     }
   }
 }
-
-module.exports.default = module.exports
