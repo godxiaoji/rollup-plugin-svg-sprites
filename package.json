@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-svg-sprites",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "Rollup plugin for creating SVG sprites.",
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
@@ -28,7 +28,6 @@
   "dependencies": {
     "@rollup/pluginutils": "^4.1.1",
     "@vue/compiler-sfc": "^3.2.23",
-    "domready": "^1.0.8",
     "md5": "^2.3.0",
     "svg-baker": "^1.7.0"
   },
