@@ -1,7 +1,14 @@
-import { compileTemplate } from '@vue/compiler-sfc'
+let vueCompiler: any
+const getVueCompiler = async () => {
+  if (vueCompiler) return vueCompiler
+  vueCompiler = await import('@vue/compiler-sfc')
+  return vueCompiler
+}
 
-function compileJSXCode(id: string, path: string) {
+const compileJSXCode = (id: string, path: string) => {
   return (
+    `
+    ` +
     (process.env.NODE_ENV === 'production'
       ? `
 import { jsxs as _jsxs } from 'react/jsx-runtime'
@@ -20,13 +27,16 @@ function SVGComponent() {
     })]
   })
 }
+
 export default SVGComponent
 `
   )
 }
 
-function compileVueTemplateCode(id: string, path: string) {
-  const { code } = compileTemplate({
+const compileVueTemplateCode = async (id: string, path: string) => {
+  const compiler = await getVueCompiler()
+
+  const { code } = compiler.compileTemplate({
     id: JSON.stringify(id),
     source: `<svg><use xlink:href="#${id}"></use></svg>`,
     filename: path,
@@ -35,6 +45,7 @@ function compileVueTemplateCode(id: string, path: string) {
 
   return `
 ${code}
+
 export default { render: render }
 `
 }

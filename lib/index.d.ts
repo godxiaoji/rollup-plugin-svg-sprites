@@ -29,7 +29,7 @@ declare type Options = {
 export default function svgSprites(options?: Options): {
     name: string;
     enforce: "pre";
-    resolveId(source: string, importer: string): "svg-sprites-virtual-module" | null;
+    resolveId(source: string, importer: string): false | "svg-sprites-virtual-module" | null;
     load(id: string): Promise<string | null>;
 };
 export {};

@@ -41,6 +41,7 @@ type Options = {
 
 export default function svgSprites(options: Options = {}) {
   const svgRegex = /\.svg(\?(jsx|vueComponent))?$/
+  const externalRegex = /^(vue|react)/
   const filter = createFilter(options.include, options.exclude)
 
   return {
@@ -53,6 +54,10 @@ export default function svgSprites(options: Options = {}) {
       // if (source.match(svgRegex)) {
       //   return source
       // }
+      if (importer && importer.match(svgRegex) && source.match(externalRegex)) {
+        // external
+        return false
+      }
       return null
     },
     async load(id: string) {
@@ -103,20 +108,28 @@ export default function svgSprites(options: Options = {}) {
       }
 
       const renders = [
-        'import {sprite, SpriteSymbol} from "svg-sprites-virtual-module"',
-        `const symbol = new SpriteSymbol(${JSON.stringify(symbolOptions)})`,
-        'sprite.add(symbol)'
+        `
+import { sprite, SpriteSymbol } from "svg-sprites-virtual-module"
+
+const symbol = new SpriteSymbol(${JSON.stringify(symbolOptions)})
+sprite.add(symbol)`
       ]
 
+      let code: string
+
       if (query === 'jsx' || options.jsx) {
-        renders.push(compileJSXCode(symbolOptions.id, path))
+        code = compileJSXCode(symbolOptions.id, path)
       } else if (query === 'vueComponent' || options.vueComponent) {
-        renders.push(compileVueTemplateCode(symbolOptions.id, path))
+        code = await compileVueTemplateCode(symbolOptions.id, path)
       } else {
-        renders.push('export default symbol')
+        code = `
+export default symbol`
       }
 
-      return renders.join(`\n`)
+      renders.push(code)
+
+      return renders.join(`
+      `)
     }
   }
 }
