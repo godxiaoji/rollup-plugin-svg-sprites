@@ -54,10 +54,10 @@ export default function svgSprites(options: Options = {}) {
       // if (source.match(svgRegex)) {
       //   return source
       // }
-      if (importer && importer.match(svgRegex) && source.match(externalRegex)) {
-        // external
-        return false
-      }
+      // if (importer && importer.match(svgRegex) && source.match(externalRegex)) {
+      //   // external
+      //   return false
+      // }
       return null
     },
     async load(id: string) {
