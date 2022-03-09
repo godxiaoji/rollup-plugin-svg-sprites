@@ -5,7 +5,7 @@ declare module '*.svg?vueComponent' {
 }
 
 declare module '*.svg?jsx' {
-  import { ReactElement } from 'react'
-  const src: ReactElement<any, any>
+  import React from 'react'
+  const src: React.FC<React.SVGAttributes<SVGSVGElement>>
   export default src
 }
